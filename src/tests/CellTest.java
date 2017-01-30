@@ -6,7 +6,8 @@ import view.Field;
 
 public class CellTest {
 
-    Field field = new Field(3,4);
+    Field field = new Field(3,4, 1);
+
     @Test
     public void checkGetState() {
         Assert.assertEquals(field.getCell(0,0).getState(), "|X|");
@@ -14,5 +15,4 @@ public class CellTest {
         Assert.assertNotEquals(field.getCell(0,1).getState(), "|X|");
         Assert.assertNotEquals(field.getCell(0,0).getState(), " - ");
     }
-
 }

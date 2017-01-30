@@ -8,7 +8,7 @@ import view.Field;
 
 public class FieldTest {
 
-    Field field = new Field(3,4);
+    Field field = new Field(3,4, 1);
 
     @Test
     public void checkGetWeightSize() {
@@ -18,8 +18,8 @@ public class FieldTest {
 
     @Test
     public void checkGetHeightSize() {
-        Assert.assertEquals(field.getWeightSize(),4);
-        Assert.assertNotEquals(field.getWeightSize(), 5);
+        Assert.assertEquals(field.getWidthSize(),4);
+        Assert.assertNotEquals(field.getWidthSize(), 5);
     }
 
     @Test
