@@ -17,17 +17,18 @@ public class App {
         StoreDataSector data = new StoreDataSector();
 
         try {
-            data = checkValidInput(args);
-            Field field = createField(data);
-            GroupFinder finder = new GroupFinder(field);
-            Group[] group = finder.findGroup();
-            Print.printResult(field, data.getFillFactor(), group);
+            data = createData(args);
         } catch (ParseException e) {
             System.out.println(data.printDemand());
         }
+
+        Field field = createField(data);
+        GroupFinder finder = new GroupFinder(field);
+        Group[] group = finder.findGroup();
+        Print.printResult(field, data.getFillFactor(), group);
     }
 
-    private static StoreDataSector checkValidInput(String[] args) throws ParseException {
+    private static StoreDataSector createData(String[] args) throws ParseException {
         Parser parser = new Parser();
         parser.parse(args);
         return parser.getData();

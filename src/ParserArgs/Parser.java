@@ -45,6 +45,7 @@ public class Parser {
 
 
     public StoreDataSector getData() throws ParseException {
+        //я знаю, что ужасный метод, но я не знаю, как его изменить.
         int height;
         int width;
         try {
@@ -57,6 +58,7 @@ public class Parser {
 
         String fillFactorStr = commandLine.getOptionValue("fillFactor");
         double fillFactor;
+
         if (ValueUtils.checkValueDouble(fillFactorStr)) {
             fillFactor = Double.parseDouble(fillFactorStr);
         } else {
