@@ -1,4 +1,4 @@
-package ParserArgs;
+package parserArgs;
 
 public class StoreDataSector {
     private int height;

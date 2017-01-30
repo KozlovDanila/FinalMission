@@ -8,7 +8,11 @@ public class Cell {
         this.state = state;
     }
 
-    public String getState() {
+    public State getState() {
+        return state;
+    }
+
+    public String getValueState() {
         return state.getState();
     }
 }

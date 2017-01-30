@@ -1,9 +1,13 @@
 package app;
 
-import ParserArgs.Parser;
-import ParserArgs.StoreDataSector;
-import Utils.GenerateFillFactor;
 import org.apache.commons.cli.ParseException;
+import parserArgs.Parser;
+import parserArgs.StoreDataSector;
+import ranking.Group;
+import ranking.GroupFinder;
+import utils.GenerateFillFactor;
+import utils.Print;
+import utils.Randomiser;
 import view.Field;
 
 public class App {
@@ -15,10 +19,9 @@ public class App {
         try {
             data = checkValidInput(args);
             Field field = createField(data);
-
-            //поиск
-            //печать
-
+            GroupFinder finder = new GroupFinder(field);
+            Group[] group = finder.findGroup();
+            Print.printResult(field, data.getFillFactor(), group);
         } catch (ParseException e) {
             System.out.println(data.printDemand());
         }
@@ -33,9 +36,11 @@ public class App {
     private static Field createField(StoreDataSector data) {
         int height = data.getHeight();
         int width = data.getWidth();
-        double fillFactorPercent =  data.getFillFactor();
+        double fillFactorPercent = data.getFillFactor();
         int fillFactor = GenerateFillFactor.generate(height, width, fillFactorPercent);
-        return new Field(height, width, fillFactor);
+        Field field = new Field(height, width);
+        Randomiser.createRandomBusyPlace(field, fillFactor);
+        return field;
     }
 
 }

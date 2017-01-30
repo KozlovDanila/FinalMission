@@ -1,6 +1,9 @@
-package Utils;
+package utils;
 
 public final class ValueUtils {
+
+    public ValueUtils() {
+    }
 
     public static boolean checkValueInt(String str) {
         for (int i = 0; i < str.length(); i++) {
