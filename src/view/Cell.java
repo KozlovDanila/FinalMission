@@ -2,17 +2,21 @@ package view;
 
 public class Cell {
 
-    private State state;
+    private String state;
 
-    public Cell(State state) {
+    public Cell(String state) {
         this.state = state;
     }
 
-    public State getState() {
-        return state;
+    public void setFreeCell() {
+        state = " - ";
     }
 
-    public String getValueState() {
-        return state.getState();
+    public void setBusyCell() {
+        state = "|X|";
+    }
+
+    public String getState() {
+        return state;
     }
 }

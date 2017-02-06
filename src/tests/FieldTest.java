@@ -2,8 +2,6 @@ package tests;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
-import view.BusyPlace;
-import view.Cell;
 import view.Field;
 
 public class FieldTest {

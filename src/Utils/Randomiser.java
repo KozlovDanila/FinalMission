@@ -1,6 +1,5 @@
 package utils;
 
-import view.BusyPlace;
 import view.Field;
 
 public final class Randomiser {

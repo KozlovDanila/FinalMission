@@ -1,7 +1,5 @@
 package parserArgs;
 
-import utils.ValueUtils;
-import jdk.nashorn.internal.runtime.ParserException;
 import org.apache.commons.cli.*;
 
 public class Parser {
@@ -44,49 +42,33 @@ public class Parser {
     }
 
 
-    public StoreDataSector getData() throws ParseException {
-        //я знаю, что ужасный метод, но я не знаю, как его изменить.
-        int height;
-        int width;
-        try {
-            height = getValueInt("height");
-            width = getValueInt("width");
-        } catch (ParserException e) {
-            throw new ParseException("");
+    public InputData getData() throws ParseException, NumberFormatException {
+        int height = Integer.parseInt(commandLine.getOptionValue("height"));
+        int width = Integer.parseInt(commandLine.getOptionValue("width"));
+        double fillFactor = Double.parseDouble(commandLine.getOptionValue("fillFactor"));
+
+        if (!checkCorrectData(height, width, fillFactor)) {
+            throw new NumberFormatException();
         }
 
-
-        String fillFactorStr = commandLine.getOptionValue("fillFactor");
-        double fillFactor;
-
-        if (ValueUtils.checkValueDouble(fillFactorStr)) {
-            fillFactor = Double.parseDouble(fillFactorStr);
-        } else {
-            throw new ParseException("");
-        }
-
-        if (!checkBorder(height, width, fillFactor)) {
-            throw new ParseException("");
-        }
-
-        return new StoreDataSector(height, width, fillFactor);
+        return new InputData(height, width, fillFactor);
     }
 
-    private boolean checkBorder(int height, int width, double fillFactor) {
-        if (height < 0 || width < 0) {
+    private boolean checkCorrectData(int height, int width, double fillFactor) {
+        if (checkValueLessThanZero(height) || checkValueLessThanZero(width)) {
             return false;
         }
-        if (fillFactor < 0.0 || fillFactor > 1.0) {
+        if (checkCorrectFillFactor(fillFactor)) {
             return false;
         }
         return true;
     }
 
-    public int getValueInt(String str) throws ParseException {
-        String valueStr = commandLine.getOptionValue(str);
-        if (ValueUtils.checkValueInt(valueStr)) {
-            return Integer.parseInt(valueStr);
-        }
-        throw new ParseException("");
+    private boolean checkValueLessThanZero(int value) {
+        return value < 0;
+    }
+
+    private boolean checkCorrectFillFactor(double fillFactor) {
+        return fillFactor < 0 || fillFactor > 1.0 ;
     }
 }
